@@ -1,3 +1,4 @@
+var express = require('express')
 var app = express()
 const PORT = 4000
 app.use(express.json())
@@ -48,3 +49,5 @@ app.get("products/:id", (req,res)=>{
     // If the item exist then  send as response
     res.status(200).json(singleProduct)
 })
+
+app.listen(PORT, ()=>{console.log("Server is running at ", PORT)})
