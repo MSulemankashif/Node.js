@@ -1,7 +1,34 @@
 var express = require('express')
 var app = express()
 const PORT = 4000
+var fs = require('fs');
 app.use(express.json())
+
+app.use(logger)
+
+
+// App Level Middle Ware
+function logger(req, res, next){
+    const logText = `${new Date().getDate().toString()} ${req.method} ${req.url} \n`;
+
+    fs.appendFile("server_logs.txt", logText, (err)=>{
+        if(err){
+            console.error("Failed to wrtie to log file: ", err)
+        }
+        next();
+    });
+}
+
+// Route Specific Middle Ware
+
+function validateId(req, res, next){
+    var id = req.params.id
+
+    if (!id || isNaN(id) || id<0){
+        res.status(400).json({message: "Please provide valid Id"})
+    }
+    next()
+}
 
 // Local DB
 var productList = [
@@ -74,3 +101,34 @@ app.post("/products", (req, res)=> {
 
 
 // Update a product
+app.put("/products/:id", (req, res)=>{
+
+    var paramId  = req.params.id;
+    var existingProduct  = productList.find( product => product.id == paramId)
+    if(!existingProduct){
+        return res.status(404).json({message: "Product does not exist on this Id"})
+    }
+
+    // Now get the updated title and price 
+    var {title, price} = req.body
+
+    // After this now update the existing product
+    existingProduct.title = title ?? existingProduct.title
+    existingProduct.price = title ?? existingProduct.price
+
+    // Now send the response 
+    res.status(200).json({message: "Product Updated", updatedProduct: existingProduct})
+})
+
+// Delete a Product
+app.delete("/products/:id", (req,res)=>{
+
+    // Check Existance
+    var paramId = req.params.id;
+    var product = productList.find(product => product.id != paramId)
+
+    // npw send the response
+    res.status(200).json({message: "Product deleted"})
+})
+
+app.listen(PORT, ()=>{ console.log("Server is running at", PORT)})
