@@ -1,3 +1,10 @@
+var productList = [
+    {
+        id: 1,
+        title: "Laptop",
+        price: "2000"
+    }
+]
 function getAllProducts(req, res){
     res.status(200).json(productList)
 }
@@ -20,7 +27,7 @@ function getProductById(req, res){
 }
 
 
-function addEmployee(req, res){
+function addProduct(req, res){
     // Get data from the request body
 
     var {title, price} = req.body
@@ -45,7 +52,7 @@ function addEmployee(req, res){
 }
 
 
-function updateEmployee(req, res){
+function updateProduct(req, res){
         var paramId  = req.params.id;
     var existingProduct  = productList.find( product => product.id == paramId)
     if(!existingProduct){
@@ -64,7 +71,7 @@ function updateEmployee(req, res){
 }
 
 
-function deleteEmployee(req, res){
+function deleteProduct(req, res){
     // Check Existance
     var paramId = req.params.id;
     var product = productList.find(product => product.id != paramId)
@@ -76,7 +83,7 @@ function deleteEmployee(req, res){
 module.exports = {
     getAllProducts,
     getProductById,
-    addEmployee,
-    updateEmployee,
-    deleteEmployee
+    addProduct,
+    updateProduct,
+    deleteProduct
 }

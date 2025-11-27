@@ -3,7 +3,8 @@ var app = express()
 const PORT = 4000
 var fs = require('fs');
 app.use(express.json())
-
+var productRoutes  = require('./routes/products_routes')
+app.use('/products', productRoutes)
 app.use(logger)
 
 
@@ -29,6 +30,8 @@ function logger(req, res, next){
 //     }
 //     next()
 // }
+
+
 
 
 
