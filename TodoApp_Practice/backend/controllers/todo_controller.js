@@ -44,12 +44,35 @@ async function getTodoById(req, res){
     }
 
     // Update Todo by ID
-aysnc function updateTodo(req, res){
+    async function updateTodo(req, res){
     // get id from parameter
     let id = req.params.id
 
     // get the updated data from request body
     let updateData = req.body
 
+
+    // Now Update the data
+    await TodoModel.findbyIdAndUpdate(id, updateData)
+
+    res.staus(200).json({message: "Todo Updated"})
     
+}
+
+async function deleteTodos(req, res) {
+    // Get id from parameter
+    let id = req.params.id
+
+    // Now update the data
+    await TodoModel.findbyIdAndDelete(id)
+
+    res.status(200).json({message: "Todo Deleted"})
+}
+
+module.exports = {
+    getAllTodos,
+    getTodoById,
+    postTodo,
+    updateTodo,
+    deleteTodos
 }

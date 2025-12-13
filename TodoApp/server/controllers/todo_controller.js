@@ -72,8 +72,6 @@ async function updateTodo(req,res){
 
 
   res.status(200).json({message: "todo updated"})
-
- 
   
 }
 
