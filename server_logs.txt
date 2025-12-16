@@ -19,3 +19,10 @@
 27 GET /products/ 
 27 GET /favicon.ico 
 27 POST /products/1 
+15 GET / 
+15 GET / 
+15 GET / 
+15 GET / 
+15 GET / 
+15 GET / 
+15 GET / 

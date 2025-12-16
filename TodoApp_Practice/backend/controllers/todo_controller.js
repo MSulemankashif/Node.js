@@ -1,4 +1,4 @@
-let TodoModel = require("./models/todo_models")
+let TodoModel = require("../models/todo_models")
 
 // Get All Todos
 async function getAllTodos(req, res){

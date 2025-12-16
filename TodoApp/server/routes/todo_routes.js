@@ -6,8 +6,6 @@ router.route('/')
  .get(controller.getAllTodos)
  .post(controller.postTodo)
 
-
-
 router.route('/:id')
  .get(controller.getTodoById)
  .put(controller.updateTodo)

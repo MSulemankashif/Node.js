@@ -35,9 +35,6 @@ function TodoForm() {
       setTimeout(() => {
         navigate('/', {replace:true})
       }, 1000);
-
-      
-      
       
     } 
     catch (error) {
@@ -47,8 +44,6 @@ function TodoForm() {
     finally{
         setLoading(false)
     }
-
-
 
    }
 

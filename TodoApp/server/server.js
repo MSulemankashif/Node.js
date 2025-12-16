@@ -1,6 +1,6 @@
 // IMPORTS
 var express = require('express')
-var app = express()
+var app = express
 var env = require('dotenv').config()
 var cors = require('cors')
 var connectDB = require('./config/db')
@@ -13,9 +13,6 @@ connectDB()
 app.use(cors())
 app.use("/todos",todoRouter)
 app.use(require('./middleware/error_handler'))
-
-
-
 
 
 // SERVER RUN

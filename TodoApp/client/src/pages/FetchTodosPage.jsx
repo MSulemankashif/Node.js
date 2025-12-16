@@ -28,13 +28,7 @@ function FetchTodosPage() {
     }
   }
 
-
   useEffect( ()=>{fetchTodos()},  []   )
-
-
-
-
-
 
   return (
     <div className='container mt-3' >
@@ -42,7 +36,7 @@ function FetchTodosPage() {
 
             <div className='d-flex justify-content-between'>
                 <h3>My Todo List</h3>
-                <button className='btn btn-primary' onClick={ ()=>{ navigate("/add_todo", {replace:true})  }  }  >Add Todo</button>
+                <button className='btn btn-primary' onClick={ ()=>{ navigate("/add_todo", {replace:true}) } }>Add Todo</button>
             </div>
 
             {loading && <div className='alert alert-info'> Loading Todos... </div> }
