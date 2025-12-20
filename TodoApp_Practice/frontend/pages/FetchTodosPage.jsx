@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-import Slider from '@mui/material/Slider'
-import TodoTile from '../components/TodoTile';
+import { useNavigate } from 'react-router-dom'
+import TodoTile from '../components/TodoTile'
 import axios from 'axios'
 
  function FetchTodosPage() {
   
   let navigate = useNavigate();
 
-  let [loading, setLoading] = useState(false);
+  let [loading, setLoading] = useState(false)
   let [error, setError] = useState("")
   let [todoList, setTodoList] = useState([])
 
@@ -17,10 +16,10 @@ import axios from 'axios'
     try{
         setLoading(true);
         setError('')
-        let response = await axios.get('http://localhost:3000/todos');
+        let response = await axios.get('http://localhost:3000/todos')
         setTodoList(response.data)
     }
-    catch(err){
+    catch(error){
         setError(error || "Something went wrong")
     }
     finally{
@@ -44,7 +43,7 @@ import axios from 'axios'
               {error && <div className='alert alert-danger'>{error}</div>}
 
 
-              {!loading && todoList.length == 0 && (<div className='alert alert-warning'>No Todos Found</div>)}
+              {!loading && todoList.length === 0 && (<div className='alert alert-warning'>No Todos Found</div>)}
         
               <ul className='list-group mt-3'>
 
