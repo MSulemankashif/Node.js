@@ -1,6 +1,6 @@
 import React from 'react'
 import AddTodoPage from '../pages/AddTodoPage'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import FetchTodosPage from '../pages/FetchTodosPage'
 
 function App() {

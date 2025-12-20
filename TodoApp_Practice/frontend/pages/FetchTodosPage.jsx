@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import Slider from '@mui/material/Slider'
 import TodoTile from '../components/TodoTile';
 import axios from 'axios'
 
