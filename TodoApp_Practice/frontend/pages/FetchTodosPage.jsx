@@ -27,7 +27,9 @@ import axios from 'axios'
     }
   }
 
-  useEffect(() => {fetchTodos(), []})
+  useEffect(() => {
+    fetchTodos()
+  }, [])
   
     return (
     <div className='container mt-3'>
