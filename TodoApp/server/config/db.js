@@ -1,6 +1,5 @@
 var mongoose = require('mongoose')
 
-
 async function connectDB(){
     try {
         var conn = await mongoose.connect(process.env.MONGODB_URI)
