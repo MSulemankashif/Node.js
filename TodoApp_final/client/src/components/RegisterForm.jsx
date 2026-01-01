@@ -2,17 +2,16 @@ import React, { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import { replace, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
 
-function LoginForm() {
+function RegisterForm() {
   
    var navigate = useNavigate()
-   var {saveTokenAndUserData} = useAuth()
 
    var [formData,setFormData] = useState({
-
+    name: "",
     email: "",
-    password: ""
+    password: "",
+    confirmPassword: ""
    })
 
 
@@ -27,7 +26,7 @@ function LoginForm() {
 
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-    if (!formData.email || !formData.password) {
+    if (!formData.name   || !formData.email || !formData.password || !formData.confirmPassword ) {
         setError("Please provide all the fields")
         return;
     }
@@ -43,28 +42,31 @@ function LoginForm() {
     }
 
 
-    // attempt to login the user
+    if ( formData.password !== formData.confirmPassword  ) {
+        setError("Password does not match")
+        return;
+    }
+
+    // attempt to register the user
     try {
         setLoading(true)
         setError("")
         setSuccess("")
 
         var response = await axios.post(
-            "http://localhost:3000/auth/login",{
+            "http://localhost:3000/auth/register",{
+                name: formData.name,
                 email: formData.email,
                 password: formData.password
             }
         )
 
-
-        saveTokenAndUserData(response.data.token,   response.data.userData )
-
         setTimeout(() => {
-                navigate('/', {replace:true})
+                navigate('/auth/login', {replace:true})
         }, 1000);
 
-
-        setSuccess("Login Successful")
+        
+        setSuccess("Account created!")
         setError("")
 
     } catch (error) {
@@ -81,13 +83,25 @@ function LoginForm() {
     <div className='container mt-5'>
 
         <div className='card p-4 shadow' style={{ maxWidth: "500px", margin: "0 auto"  }} >
-            <h3 className='mb-3 text-center' >Sign In Now</h3>
+            <h3 className='mb-3 text-center' >Register Now</h3>
 
             {error &&   <div className='alert alert-danger'> {error}</div>  }
             {success &&   <div className='alert alert-success'> {success}</div>  }
 
             <form action="" onSubmit={ (e)=>{ submit(e)} }>
 
+
+
+                <div className='mb-3'>
+                    <label className='form-label' >Name</label>
+                    <input
+                      className='form-control'
+                      type="text"
+                      value={formData.name}
+                      onChange={ (e)=>{ setFormData( { ...formData , name: e.target.value} )  } }
+                      placeholder='Enter full name'
+                    />
+                </div>
 
 
                 <div className='mb-3'>
@@ -103,7 +117,7 @@ function LoginForm() {
                 </div>
 
                 <div className='mb-3'>
-                    <label className='form-label'>Password</label>
+                    <label className='form-label' >Password</label>
                     <input
                       
                       className='form-control'
@@ -116,14 +130,29 @@ function LoginForm() {
                 </div>
 
 
+                <div className='mb-3'>
+                    <label className='form-label' >Confirm Password</label>
+                    <input
+                      className='form-control'
+                      rows={3}
+                      value={formData.confirmPassword}
+                      onChange={ (e)=>{ setFormData( { ...formData , confirmPassword: e.target.value} )  } }
+                      type="password"
+                      placeholder='Enter confirm password'
+                    />
+                </div>
+
 
                 <button className='btn btn-primary w-100'>
-                    {loading? "Loading..." : "Sign in"   }
+                    {loading? "Loading..." : "Create Account"   }
                 </button>
             </form>
+        
+
         </div>
+
     </div>
   )
 }
 
-export default LoginForm
+export default RegisterForm

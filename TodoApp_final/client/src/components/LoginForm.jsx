@@ -103,7 +103,7 @@ function LoginForm() {
                 </div>
 
                 <div className='mb-3'>
-                    <label className='form-label'>Password</label>
+                    <label className='form-label' >Password</label>
                     <input
                       
                       className='form-control'
@@ -121,7 +121,10 @@ function LoginForm() {
                     {loading? "Loading..." : "Sign in"   }
                 </button>
             </form>
+        
+
         </div>
+
     </div>
   )
 }
