@@ -9,40 +9,6 @@ async function getAllTodos(req,res){
 }
 
 
-//======================================
-// GET TODO BY ID
-//======================================
-async function getTodoById(req,res){
-  
-  // first we will get id
-  var id = req.params.id
-
-  // now we will search by this id in our database
-  var todo = await TodoModel.findById(id)
-
-  // now check if the todo exist or not
-  if (!todo) {
-    res.status(404)
-    throw new Error("Todo not Found")
-  }
-
-  // if it exist?
-  res.status(200).json(todo);
-
-}
-
-
-//======================================
-// POST A TODO
-//======================================
-async function postTodo(req,res){
-  var {title,desc} = req.body
-  
-  if(!title || !desc){
-    res.status(400);
-    throw new Error("title and description is required")
-  }
-
   var newTodo = await TodoModel.create({
     title: title,
     desc: desc
