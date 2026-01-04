@@ -33,7 +33,7 @@ function TodoForm() {
             setDesc("")
 
             setTimeout(()=>{
-                navigate('', {replace: true})
+                navigate('/', {replace: true})
             }, 1000);
         }
 
